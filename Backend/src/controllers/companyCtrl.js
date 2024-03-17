@@ -27,4 +27,17 @@ const createCompany = async (req, res) => {
   }
 };
 
-module.exports = { createCompany };
+//Get All Companies
+const getAllCompanies = async (req, res) => {
+  try {
+    const companyAllData= await Company.find().populate('user', 'email username password');
+
+    res.json({ success: true, companyAllData });
+
+  } catch (error) {
+    // Internal server error
+    res.status(500).json({ msg: "Internal Server Error", success: false });
+  }
+};
+
+module.exports = { createCompany,getAllCompanies };
