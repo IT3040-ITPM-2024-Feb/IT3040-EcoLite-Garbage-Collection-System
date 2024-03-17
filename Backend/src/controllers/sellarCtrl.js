@@ -1,6 +1,7 @@
 const Sellar = require("../models/sellar.model");
 const User = require("../models/userModel");
 
+//Create A New Sellar
 const createSellar = async (req, res) => {
   const email = req.body.email;
 
