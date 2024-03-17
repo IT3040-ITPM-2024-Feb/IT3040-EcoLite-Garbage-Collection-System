@@ -1,9 +1,13 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./views/common/Login/login";
 
 function App() {
   return (
-    <div>
-        <h1>EcoLITE Garbage Collection System</h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
   );
 }
 
