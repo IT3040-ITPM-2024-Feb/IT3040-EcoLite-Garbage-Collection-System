@@ -1,20 +1,24 @@
+const bcrypt = require('bcrypt');
 const Company = require("../models/company.model");
 const User = require("../models/userModel");
 
 //Create A New Company
 const createCompany = async (req, res) => {
-  const companyName = req.body.companyName;
+  const {companyName ,password} = req.body;
 
   try {
     const findCompany = await Company.findOne({ companyName: companyName });
 
     if (!findCompany) {
-      const newUser = await User.create(req.body);
+      //Secure Password With Hashing
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const newUser = await User.create({companyName, password:hashedPassword});
 
       // Create a new company with the associated user ID
-      const companyData = { ...req.body, user: newUser._id };
+      const companyData = { ...req.body,password: hashedPassword, user: newUser._id };
       await Company.create(companyData);
-
+      //
+      delete newUser.password;
       // Send response with newly created user and company data
       res.json({ newUser, companyData });
     } else {
