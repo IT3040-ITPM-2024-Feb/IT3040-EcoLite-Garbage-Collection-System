@@ -13,7 +13,7 @@ const createSellar = async (req, res) => {
       //Secure Password With Hashing
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      const newUser = await User.create({ email, password: hashedPassword });
+      const newUser = await User.create({ email, password: hashedPassword,role:"seller"});
 
       // Create a new seller with the associated user ID
       const sellarData = {

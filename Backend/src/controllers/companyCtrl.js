@@ -12,7 +12,11 @@ const createCompany = async (req, res) => {
     if (!findCompany) {
       //Secure Password With Hashing
       const hashedPassword = await bcrypt.hash(password, 10);
-      const newUser = await User.create({companyName, password:hashedPassword});
+      const newUser = await User.create({
+        ...req.body,
+        password: hashedPassword,
+        role:"company"
+      });
 
       // Create a new company with the associated user ID
       const companyData = { ...req.body,password: hashedPassword, user: newUser._id };

@@ -10,7 +10,7 @@ const loginUser = async (req, res) => {
     // Check if user exists
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ message: 'Invalid email or password' });
+      return res.status(401).json({ message: 'Invalid Email or User not Found' });
     }
     // Check if password is correct
     const passwordMatch = await bcrypt.compare(password, user.password);
@@ -21,7 +21,6 @@ const loginUser = async (req, res) => {
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
     // Send token in the Authorization header with Bearer scheme
     res.status(200).json({ message: 'Login successful', token: `Bearer ${token}` });
-
   } catch (error) {
     res.status(500).json({ message: 'Internal server error' });
   }
