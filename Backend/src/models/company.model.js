@@ -25,7 +25,7 @@ const buyerSchema = new mongoose.Schema({
     },
     companyImage:{
         type:String, 
-    }    
+    },    
 },{
     timestamps:true,
 });
