@@ -27,4 +27,17 @@ const createSellar = async (req, res) => {
   }
 };
 
-module.exports = { createSellar };
+//Get All Sellars
+
+const getAllSellars = async (req, res) => {
+    try {
+      const sellers = await Sellar.find().populate('user', 'email username');
+  
+      res.json({ success: true, sellers });
+    } catch (error) {
+      // Internal server error
+      res.status(500).json({ msg: "Internal Server Error", success: false });
+    }
+  };
+
+module.exports = { createSellar,getAllSellars };

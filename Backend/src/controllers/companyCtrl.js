@@ -40,4 +40,6 @@ const getAllCompanies = async (req, res) => {
   }
 };
 
+
+
 module.exports = { createCompany,getAllCompanies };
