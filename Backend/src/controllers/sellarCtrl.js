@@ -85,4 +85,49 @@ const GetaSellar = async (req, res) => {
   }
 };
 
-module.exports = { createSeller, getAllSellars, GetaSellar };
+//Update A Sellar
+
+const updateSeller = async (req, res) => {
+  const sellerId = req.params.id; 
+
+  try {
+    const seller = await Sellar.findById(sellerId);
+    if (!seller) {
+      return res.status(404).json({ msg: "Seller not found", success: false });
+    }
+
+    const userUpdate = {};
+    if (req.body.email) userUpdate.email = req.body.email;
+    if (req.body.password) {
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+      userUpdate.password = hashedPassword;
+    }
+    if (Object.keys(userUpdate).length > 0) {
+      // Update user with new email and/or password
+      await User.findByIdAndUpdate(seller.user, userUpdate);
+    }
+
+    const updateFields = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email, 
+      phone: req.body.phone,
+      address: req.body.address
+    };
+
+    // Update only provided fields
+    Object.keys(updateFields).forEach(key => {
+      if (updateFields[key] !== undefined) {
+        seller[key] = updateFields[key];
+      }
+    });
+
+    const updatedSeller = await seller.save();
+
+    res.json({ success: true, updatedSeller: { ...seller.toObject(), email: userUpdate.email } });
+  } catch (error) {
+    console.error("Error updating seller:", error);
+    res.status(500).json({ msg: "Failed to update seller", error: error.message, success: false });
+  }
+};
+module.exports = { createSeller, getAllSellars, GetaSellar,updateSeller };

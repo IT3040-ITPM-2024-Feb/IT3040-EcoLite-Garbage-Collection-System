@@ -74,17 +74,12 @@ const getAllCompanies = async (req, res) => {
 const updateCompany = async (req, res) => {
   const companyId = req.params.id; 
 
-  try {    
-    // Find the company document by ID
-    console.log(companyId);
+  try {     
     const company = await Company.findById(companyId);
-    console.log(companyId);
-    console.log(company);
     if (!company) {
       return res.status(404).json({ msg: "Company not found", success: false });
     }
 
-    // Update the associated user if necessary
     const userUpdate = {};
     if (req.body.email) userUpdate.email = req.body.email;
     if (req.body.password) {
@@ -94,8 +89,6 @@ const updateCompany = async (req, res) => {
     if (Object.keys(userUpdate).length > 0) {
       await User.findByIdAndUpdate(company.user, userUpdate);
     }
-
-    // Update the company fields
     const updateFields = {
       companyName: req.body.companyName,
       phoneNumber: req.body.phoneNumber,
@@ -115,10 +108,15 @@ const updateCompany = async (req, res) => {
       }
     });
 
-    // Save the updated company
-    const updatedCompany = await company.save();
+       const updatedCompany = await company.save();
 
-    res.json({ success: true, updatedCompany });
+    // Include updated email in the response
+    const responseData = { success: true, updatedCompany: updatedCompany.toObject() };
+    if (userUpdate.email) {
+      responseData.updatedCompany.email = userUpdate.email;
+    }
+
+    res.json(responseData);
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: "Internal Server Error", success: false });
