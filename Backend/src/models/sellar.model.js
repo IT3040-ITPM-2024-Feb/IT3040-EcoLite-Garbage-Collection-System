@@ -4,16 +4,14 @@ const sellerSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     firstName:{
         type:String,
-        required:true,
+        required:false,
     }, 
     lastName:{
         type:String,
-        required:true,
+        required:false,
     },
     phone:{
         type:String,
-        required:true,
-        unique:true
     },
     address:{
         type:String,

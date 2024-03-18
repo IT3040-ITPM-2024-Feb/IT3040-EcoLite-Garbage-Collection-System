@@ -11,7 +11,8 @@ const createCompany = async (req, res) => {
     const userId = new mongoose.Types.ObjectId();
     const companyId = userId;
 
-    const findUser = await User.findOne({ companyName: companyName });
+    const findUser = await User.findOne({ $or: [{ companyName: companyName }, { email: email }] });
+
     if(!findUser){
        // Secure Password With Hashing
     const hashedPassword = await bcrypt.hash(password, 10);
