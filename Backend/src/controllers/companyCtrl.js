@@ -125,5 +125,22 @@ const updateCompany = async (req, res) => {
   }
 };
 
+//Get A Company
+const getACompany = async(req,res)=>{
+  const { id } = req.params;
 
-module.exports = { createCompany,getAllCompanies,updateCompany };
+  try {
+    const buyer = await Company.findById(id).populate('user', 'email');
+
+    if (!buyer) {
+      return res.status(404).json({ msg: "Buyer not found", success: false });
+    }
+
+    res.json({ success: true, buyer });
+  } catch (error) {
+    console.error("Error fetching buyer:", error);
+    res.status(500).json({ msg: "Internal Server Error", success: false });
+  }
+};
+
+module.exports = { createCompany,getAllCompanies,updateCompany,getACompany };
