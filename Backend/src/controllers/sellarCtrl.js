@@ -67,4 +67,22 @@ const getAllSellars = async (req, res) => {
   }
 };
 
-module.exports = { createSeller, getAllSellars };
+//Get a Sellar
+const GetaSellar = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const seller = await Sellar.findById(id).populate('user', 'email');
+
+    if (!seller) {
+      return res.status(404).json({ msg: "Seller not found", success: false });
+    }
+
+    res.json({ success: true, seller });
+  } catch (error) {
+    console.error("Error fetching seller:", error);
+    res.status(500).json({ msg: "Internal Server Error", success: false });
+  }
+};
+
+module.exports = { createSeller, getAllSellars, GetaSellar };

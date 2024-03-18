@@ -70,6 +70,7 @@ const getAllCompanies = async (req, res) => {
   }
 };
 
+//Update A Company
 const updateCompany = async (req, res) => {
   const companyId = req.params.id; 
 
