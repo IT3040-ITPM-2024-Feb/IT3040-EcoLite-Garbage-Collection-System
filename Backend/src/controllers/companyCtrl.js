@@ -11,7 +11,9 @@ const createCompany = async (req, res) => {
     const userId = new mongoose.Types.ObjectId();
     const companyId = userId;
 
-    // Secure Password With Hashing
+    const findUser = await User.findOne({ companyName: companyName });
+    if(!findUser){
+       // Secure Password With Hashing
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create the user with the generated ObjectId
@@ -42,6 +44,11 @@ const createCompany = async (req, res) => {
 
     // Send response with newly created user and company data
     res.json({ newUser, companyId, companyData });
+    }else{
+       // User already exists
+      res.json({ msg: "User Already Exists!", success: false });
+    }
+    
   } catch (error) {
     console.error("Error creating company:", error); // Log the error for debugging
     // Internal server error

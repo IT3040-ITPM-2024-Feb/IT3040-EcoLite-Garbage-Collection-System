@@ -4,7 +4,7 @@ const User = require("../models/userModel");
 
 //Create A New Sellar
 const createSellar = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password,firstname,lastname,phone,address} = req.body;
 
   try {
     const findUser = await User.findOne({ email: email });
