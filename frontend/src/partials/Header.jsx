@@ -11,6 +11,8 @@ import {
 import { Link } from "react-router-dom";
 import "../styles/Header.css";
 
+import Logo from "../assets/images/logo.png";
+
 const { Header } = Layout;
 
 const HeaderComponent = () => {
@@ -44,11 +46,11 @@ const HeaderComponent = () => {
         width: "100%",
       }}
     >
-      <div style={{ marginTop: "15px" }}>
+      <div>
         <a href="/">
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/LEGO_logo.svg/2048px-LEGO_logo.svg.png"
-            width="50px"
+            src={Logo}
+            width="80px"
             alt="logo"
           />
         </a>

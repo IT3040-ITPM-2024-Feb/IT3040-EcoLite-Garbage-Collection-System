@@ -10,7 +10,8 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import Home from "./Home/Home";
-import HeaderComponent from "../partials/Header"; // Import the HeaderComponent
+import HeaderComponent from "../partials/Header";
+import Footer from "../partials/Footer";
 
 const { Sider, Content } = Layout;
 
@@ -65,6 +66,7 @@ const Dashboard = () => {
           </Routes>
         </Content>
       </Layout>
+      <Footer />
     </Layout>
   );
 };
