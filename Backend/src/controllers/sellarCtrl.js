@@ -40,7 +40,6 @@ const createSeller = async (req, res) => {
     };
     await Sellar.create(sellerData);
 
-    // Send response with newly created user and seller data
     res.json({ newUser, sellerId, sellerData });
     }else{
        // User already exists
@@ -48,7 +47,7 @@ const createSeller = async (req, res) => {
     }
     
   } catch (error) {
-    console.error("Error creating seller:", error); // Log the error for debugging
+    console.error("Error creating seller:", error); 
     // Internal server error
     res.status(500).json({ msg: "Internal Server Error", success: false });
   }

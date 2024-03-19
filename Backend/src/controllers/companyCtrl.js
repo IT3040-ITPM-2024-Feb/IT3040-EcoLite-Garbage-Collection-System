@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const User = require('../models/userModel'); // Assuming the path is correct
-const Company = require('../models/company.model'); // Assuming the path is correct
+const User = require('../models/userModel'); 
+const Company = require('../models/company.model'); 
 
 const createCompany = async (req, res) => {
   const { email, password, firstName, lastName, phone, address, companyName, numberOfCenters, companySlogan, companyAbout, openHours, closeHours, companyImage } = req.body;
@@ -43,7 +43,6 @@ const createCompany = async (req, res) => {
     };
     await Company.create(companyData);
 
-    // Send response with newly created user and company data
     res.json({ newUser, companyId, companyData });
     }else{
        // User already exists
@@ -51,7 +50,7 @@ const createCompany = async (req, res) => {
     }
     
   } catch (error) {
-    console.error("Error creating company:", error); // Log the error for debugging
+    console.error("Error creating company:", error); 
     // Internal server error
     res.status(500).json({ msg: "Internal Server Error", success: false });
   }
@@ -141,4 +140,28 @@ const getACompany = async(req,res)=>{
   }
 };
 
-module.exports = { createCompany,getAllCompanies,updateCompany,getACompany };
+//Delete A Company
+const deleteCompany = async (req, res) => {
+  const companyId = req.params.id;
+
+  try {
+    const company = await Company.findById(companyId);
+    if (!company) {
+      return res.status(404).json({ msg: "Company not found", success: false });
+    }
+
+    const user = await User.findById(company.user);
+    if (!user) {
+      return res.status(404).json({ msg: "User not found", success: false });
+    }
+    await User.findByIdAndDelete(company.user);
+
+    await Company.findByIdAndDelete(companyId);
+
+    res.json({ success: true, msg: "Company and associated user deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting company:", error);
+    res.status(500).json({ msg: "Failed to delete company", error: error.message, success: false });
+  }
+};
+module.exports = { createCompany,getAllCompanies,updateCompany,getACompany,deleteCompany };
