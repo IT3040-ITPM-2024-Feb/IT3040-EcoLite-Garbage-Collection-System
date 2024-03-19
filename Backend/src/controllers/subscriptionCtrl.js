@@ -105,4 +105,21 @@ const fetchSubscribedSellersDetails = async (req, res) => {
     }
 };
 
-module.exports = {subscribeToCompany,unsubscribeFromCompany,fetchSubscribedSellersDetails}
+//Ranking Companies Using The Sellar Subscription
+const fetchCompanyRanking = async (req, res) => {
+    try {       
+        const companies = await Company.find({}, 'companyName subscribedSellersCount');
+
+        // Sort companies by subscribed sellers count in descending order
+        const rankedCompanies = companies
+            .map((company, index) => ({ ...company.toObject(), rank: index + 1 })) 
+            .sort((a, b) => b.subscribedSellersCount - a.subscribedSellersCount); 
+
+        res.json({ success: true, rankedCompanies });
+    } catch (error) {
+        console.error('Error fetching company ranking:', error);
+        res.status(500).json({ success: false, msg: 'Internal Server Error' });
+    }
+};
+
+module.exports = {subscribeToCompany,unsubscribeFromCompany,fetchSubscribedSellersDetails,fetchCompanyRanking}
