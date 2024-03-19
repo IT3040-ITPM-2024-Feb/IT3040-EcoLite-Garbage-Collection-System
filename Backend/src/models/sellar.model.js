@@ -16,7 +16,7 @@ const sellerSchema = new mongoose.Schema({
     address:{
         type:String,
     }, 
-    subscribedCompany: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null } // Refers to the buyer representing the company
+    subscribedCompany: { type: mongoose.Schema.Types.ObjectId, ref: 'Company', default: null } // Refers to the buyer representing the company
 });
 
 const Seller = mongoose.model('Seller', sellerSchema);
