@@ -130,4 +130,30 @@ const updateSeller = async (req, res) => {
     res.status(500).json({ msg: "Failed to update seller", error: error.message, success: false });
   }
 };
-module.exports = { createSeller, getAllSellars, GetaSellar,updateSeller };
+
+//Delete a Sellar
+const deleteSeller = async (req, res) => {
+  const sellerId = req.params.id;
+
+  try {
+    const seller = await Sellar.findById(sellerId);
+    if (!seller) {
+      return res.status(404).json({ msg: "Seller not found", success: false });
+    }
+
+    const user = await User.findById(seller.user);
+    if (!user) {
+      return res.status(404).json({ msg: "User not found", success: false });
+    }
+    await User.findByIdAndDelete(seller.user);
+
+    await Sellar.findByIdAndDelete(sellerId);
+
+    res.json({ success: true, msg: "Seller and associated user deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting seller:", error);
+    res.status(500).json({ msg: "Failed to delete seller", error: error.message, success: false });
+  }
+};
+
+module.exports = { createSeller, getAllSellars, GetaSellar,updateSeller,deleteSeller };
