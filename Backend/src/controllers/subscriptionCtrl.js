@@ -44,4 +44,32 @@ const subscribeToCompany = async (req, res) => {
     }
 };
 
-module.exports = {subscribeToCompany}
+//Get Subscribed Unique Sellars for A Company
+const fetchSubscribedSellersDetails = async (req, res) => {
+    const companyId = req.params.companyId;
+    try {
+        // Fetch the company details with subscribed sellers from the database
+        const company = await Company.findById(companyId).populate('subscribedSellers');
+        if (!company) {
+            return res.status(404).json({ success: false, msg: 'Company not found' });
+        }
+
+        // Extract seller details from subscribedSellers array
+        const subscribedSellers = company.subscribedSellers.map(seller => ({
+            _id: seller._id,
+            firstName: seller.firstName,
+            lastName: seller.lastName,
+            phone: seller.phone,
+            address: seller.address
+            // Add more seller details as needed
+        }));
+
+        // Return subscribed sellers' details
+        res.json({ success: true, subscribedSellers });
+    } catch (error) {
+        console.error('Error fetching subscribed sellers:', error);
+        res.status(500).json({ success: false, msg: 'Internal Server Error' });
+    }
+};
+
+module.exports = {subscribeToCompany,fetchSubscribedSellersDetails}
