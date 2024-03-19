@@ -38,15 +38,18 @@ const authMiddleware = async (req, res, next) => {
 };
 
 //Identify Admin 
-const IsAdmin = asyncHandler(async(req,res,next)=>{
-    const {email} = req.user;
-    const isAdminUser= await User.findOne({email});
-    if(isAdminUser.role !=="admin"){
-          throw new Error('You are not an admin')
+const isAdmin = async (req, res, next) => {
+    try {
+        const { email } = req.user;
+        const isAdminUser = await User.findOne({ email });
+        if (!isAdminUser || isAdminUser.role !== "admin") {
+            throw new Error('You are not an admin');
+        } else {
+            next();
+        }
+    } catch (error) {
+        return res.status(403).json({ msg: error.message, success: false });
     }
-    else{
-      next();
-    }
-});
+};
 
-module.exports = authMiddleware;
+module.exports = {authMiddleware, isAdmin};
