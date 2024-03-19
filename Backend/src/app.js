@@ -4,6 +4,7 @@ const dotenv = require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 4000;
 const bodyParser = require("body-parser");
+const cors = require('cors');
 // const { notFound, errorHandler } = require("./middlewares/errorHandler");
 const authRoute = require("./routers/auth.route");
 const companyRoute = require("./routers/company.route");
@@ -13,6 +14,7 @@ dbConnect();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 // app.use(notFound);
 // app.use(errorHandler);
 
