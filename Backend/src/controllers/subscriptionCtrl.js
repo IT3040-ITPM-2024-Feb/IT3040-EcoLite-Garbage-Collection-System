@@ -44,6 +44,39 @@ const subscribeToCompany = async (req, res) => {
     }
 };
 
+//Unsubscribe A Company by Sellar
+const unsubscribeFromCompany = async (req, res) => {
+    const { sellerId, companyId } = req.body;
+
+    try {
+        // Check if the seller is subscribed to the company
+        const seller = await Sellar.findById(sellerId);
+        if (!seller) {
+            return res.status(404).json({ msg: "Seller not found", success: false });
+        }
+
+        if (seller.subscribedCompany.toString() !== companyId) {
+            return res.status(400).json({ msg: "Seller is not subscribed to this company", success: false });
+        }
+
+        // Unsubscribe the seller from the company
+        const company = await Company.findById(companyId);
+        if (company) {
+            company.subscribedSellersCount -= 1;
+            company.subscribedSellers.pull(sellerId);
+            await company.save();
+        }
+
+        seller.subscribedCompany = null;
+        await seller.save();
+
+        res.json({ success: true, msg: "Seller unsubscribed from company successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "Internal Server Error", success: false });
+    }
+};
+
 //Get Subscribed Unique Sellars for A Company
 const fetchSubscribedSellersDetails = async (req, res) => {
     const companyId = req.params.companyId;
@@ -72,4 +105,4 @@ const fetchSubscribedSellersDetails = async (req, res) => {
     }
 };
 
-module.exports = {subscribeToCompany,fetchSubscribedSellersDetails}
+module.exports = {subscribeToCompany,unsubscribeFromCompany,fetchSubscribedSellersDetails}
