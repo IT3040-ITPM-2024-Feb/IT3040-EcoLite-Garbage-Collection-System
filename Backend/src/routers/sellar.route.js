@@ -9,4 +9,5 @@ router.get("/:id",authMiddleware,GetaSellar);
 router.put("/:id",authMiddleware,updateSeller);
 router.delete("/:id",authMiddleware,deleteSeller);
 
+
 module.exports =router;
