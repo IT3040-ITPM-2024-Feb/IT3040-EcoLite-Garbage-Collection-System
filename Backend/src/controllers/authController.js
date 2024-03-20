@@ -20,7 +20,7 @@ const loginUser = async (req, res) => {
     // Generate JWT token
     const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
     // Send token in the Authorization header with Bearer scheme
-    res.status(200).json({ message: 'Login successful', token: `Bearer ${token}` });
+    res.status(200).json({ message: 'Login successful',userId:user._id,role: user.role ,token: `Bearer ${token}` });
   } catch (error) {
     res.status(500).json({ message: 'Internal server error' });
   }
