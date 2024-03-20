@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import SellerRegister from "./pages/SellerRegister";
 import BuyerRegister from "./pages/BuyerRegister";
+import AllCompany from "./pages/Company/CompanyAll/AllCompany";
 import AdminDashborad from "./pages/Admin/AdminDashboard";
 import CompanyDashborad from "./pages/Company/companyDashboard";
 
@@ -31,6 +32,7 @@ function App() {
         <Route path="/companyDashboard" element={<CompanyDashborad />} />
         <Route path="/seller-register" element={<SellerRegister />} />
         <Route path="/buyer-register" element={<BuyerRegister />} />
+        <Route path="/company-all" element={<AllCompany />} />
         <Route
           path="/"
           element={
