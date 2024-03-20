@@ -9,6 +9,7 @@ import BuyerRegister from "./pages/BuyerRegister";
 function App() {
   // const isLogged = window.localStorage.getItem("LoggedIn"); //Uncomment this after implementing login functionality
   const isLogged = true;
+  const role = window.localStorage.getItem("role");
 
   return (
     <>

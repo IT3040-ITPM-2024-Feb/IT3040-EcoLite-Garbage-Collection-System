@@ -20,7 +20,7 @@ const SideMenu = ({ menuItems }) => {
         padding: "50px 10px 10px 10px",
         position: "fixed",
         left: 10,
-        top: 100,
+        top: 130,
         bottom: 0,
         borderRight: 0,
       }}
