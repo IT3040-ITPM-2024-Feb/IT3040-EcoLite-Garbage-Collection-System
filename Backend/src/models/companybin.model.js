@@ -1,21 +1,22 @@
 const mongoose = require('mongoose');
 
 const binSchema = new mongoose.Schema({
-    BinName:{
+    binName:{
         type:String,
-        unique:true,
+        required:true
     },
-    BinID:{
-        type:Number
+    binID:{
+        type:String,
+        // unique:true
     },
-    BinLocation:{
+    binLocation:{
         type:String,
         required:false,
     }, 
-    BinOpenTime:{
+    binOpenTime:{
         type:String,
     }, 
-    BinCloseTime:{
+    binCloseTime:{
         type:String,
     }, 
     

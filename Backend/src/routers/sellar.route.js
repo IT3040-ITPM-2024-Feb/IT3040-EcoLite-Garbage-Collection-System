@@ -10,4 +10,4 @@ router.put("/:id",authMiddleware,updateSeller);
 router.delete("/:id",authMiddleware,deleteSeller);
 
 
-module.exports =router;
+module.exports =router; 
