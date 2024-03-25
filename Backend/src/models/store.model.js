@@ -1,17 +1,51 @@
+// const mongoose = require('mongoose');
+
+// const StoreItemSchema = new mongoose.Schema({
+//     itemId:{
+//         type:String,
+//         required:true,
+//     },
+//     itemName:{
+//         type:String,
+//         required:true,
+//         // unique:true,
+//     },
+//     companyName:{
+//         type:String,
+//         required:true,
+//     }, 
+//     itemAmount:{
+//         type:String,
+//         required:true,
+//     }, 
+//     itemDescription:{
+//         type:String,
+//     }, 
+//     itemImage:{
+//         type:String,
+//         required:true
+// },
+
+
+// });
+
+// const item = mongoose.model('Item', StoreItemSchema);
+
+// module.exports = item;
+
+
 const mongoose = require('mongoose');
 
-const StoreItemSchema = new mongoose.Schema({
+ const StoreItemSchema = new mongoose.Schema({
     itemId:{
-        type:String,
-        required:false,
-        unique:true
-    },
+         type:String,
+      required:true,
+     },
     itemName:{
         type:String,
         required:true,
-        // unique:true,
-    },
-    companyName:{
+     },
+     companyName:{
         type:String,
         required:true,
     }, 
@@ -20,18 +54,14 @@ const StoreItemSchema = new mongoose.Schema({
         required:true,
     }, 
     itemDescription:{
-        type:String,
-        required:true,
-        unique:true,
+         type:String,
     }, 
-    itemImage:{
+    itemImage:{     
         type:String,
-        required:true
-},
-
+        required:true },
 
 });
+ const item = mongoose.model('Item', StoreItemSchema);
 
-const item = mongoose.model('Item', StoreItemSchema);
+ module.exports = item;
 
-module.exports = item;
