@@ -38,7 +38,7 @@ function App() {
               userRole === "admin" ? (
                 <Navigate to="/adminDashboard" />
               ) : userRole === "seller" ? (
-                <Navigate to="/dashboard/*" />
+                <Navigate to="/dashboard" />
               ) : userRole === "company" ? (
                 <Navigate to="/companyDashboard" />
               ) : (
