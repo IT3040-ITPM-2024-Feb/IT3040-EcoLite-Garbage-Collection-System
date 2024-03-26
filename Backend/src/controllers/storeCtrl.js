@@ -1,37 +1,5 @@
 const Item = require('../models/store.model');
 
-// const createItem = async(req,res) =>{
-//     const itemId = req.body.itemId;
-//     const findItem = await Item.findOne({itemId:itemId});
-
-//     if(!findItem){
-//         const {itemId,itemName,companyName,itemAmount,itemDescription,itemImage} = req.body;
-//         const newItem = await Item.create({
-//             itemId,
-//             itemName,
-//             companyName,
-//             itemAmount,
-//             itemDescription,
-//             itemImage
-//         })
-//         res.json({newItem,msg:'Item is Successfully Added'});
-//     }else{
-//         res.json({msg:'Item is already Added',success:false})
-//     }    
-// }
-
-// const createItem = async(req,res)=>{
-//     const itemId =req.body.itemId;
-//     const findItem = await Item.findOne({itemId:itemId})
-
-//     if(!findItem){
-//         const newItem =Item.create(req.body);
-//         res.json(newItem);
-//     }else{
-//     res.json({msg:'Item is already Added',success:false})
-//     }
-// }
-
 const createItem = async(req,res)=>{
     const itemId = req.body.itemId;
     const findItem = await Item.findOne({itemId:itemId});
