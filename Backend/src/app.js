@@ -10,6 +10,8 @@ const authRoute = require("./routers/auth.route");
 const companyRoute = require("./routers/company.route");
 const sellarRoute = require("./routers/sellar.route");
 const subscriptionRoute = require("./routers/subscription.route");
+const binRoute = require('./routers/bin.route');
+
 dbConnect();
 
 app.use(bodyParser.json());
@@ -22,6 +24,8 @@ app.use("/api/user", authRoute);
 app.use("/api/company", companyRoute);
 app.use("/api/sellar", sellarRoute);
 app.use("/api/subscription", subscriptionRoute);
+app.use("/api/bin", binRoute);
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT}`);
