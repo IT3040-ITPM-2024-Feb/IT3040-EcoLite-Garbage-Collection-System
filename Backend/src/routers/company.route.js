@@ -4,7 +4,7 @@ const {authMiddleware,isAdmin} = require("../middlewares/authMiddleware");
 const router = express.Router();
 
 router.post("/register",createCompany);
-router.get("/all",authMiddleware,getAllCompanies);
+router.get("/all",getAllCompanies);
 router.put("/:id",authMiddleware,updateCompany);
 router.get("/:id",authMiddleware,getACompany);
 router.delete("/:id",authMiddleware,isAdmin,deleteCompany);

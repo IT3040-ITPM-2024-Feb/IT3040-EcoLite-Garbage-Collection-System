@@ -71,7 +71,6 @@ const Dashboard = () => {
           }}
         >
           <Routes>
-            {/*  Add your routes here (Make sure to import the page) */}
             <Route path="/" element={<Navigate to="/dashboard" />} />
 
             {role == "admin" ? (
