@@ -60,7 +60,6 @@ const Dashboard = () => {
           }}
         >
           <Routes>
-            {/*  Add your routes here (Make sure to import the page) */}
             <Route path="/" element={<Navigate to="/dashboard" />} />
             <Route path="/dashboard" element={<Home />} />
           </Routes>
