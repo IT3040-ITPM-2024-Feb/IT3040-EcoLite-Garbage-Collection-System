@@ -35,13 +35,15 @@ const Login = () => {
       // Set LoggedIn to true
       window.localStorage.setItem("LoggedIn", true);
 
-      if (response.data.role === "admin") {
-        window.location.href = "/adminDashboard";
-      } else if (response.data.role === "seller") {
-        window.location.href = "/dashboard";
-      } else if (response.data.role === "company") {
-        window.location.href = "/companyDashboard";
-      }
+      window.location.href = "/";
+
+      // if (response.data.role === "admin") {
+      //   window.location.href = "/adminDashboard";
+      // } else if (response.data.role === "seller") {
+      //   window.location.href = "/dashboard";
+      // } else if (response.data.role === "company") {
+      //   window.location.href = "/companyDashboard";
+      // }
 
       } catch (error) {
         console.error("Login failed", error);
