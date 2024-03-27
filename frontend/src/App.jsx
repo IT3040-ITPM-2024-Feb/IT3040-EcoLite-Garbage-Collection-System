@@ -11,51 +11,58 @@ import AdminDashborad from "./pages/Admin/AdminDashboard";
 import CompanyDashborad from "./pages/Company/companyDashboard";
 
 function App() {
-  const [isLogged, setIsLogged] = useState(false);
-  const [userRole, setUserRole] = useState(null);
-
-  useEffect(() => {
-    // Check if the user is logged in
-    const loggedIn = window.localStorage.getItem("LoggedIn");
-    setIsLogged(loggedIn === "true");
-
-    // Get user role from local storage
-    const role = window.localStorage.getItem("role");
-    setUserRole(role);
-  }, []);
+  const isLogged = window.localStorage.getItem("LoggedIn");
 
   return (
-    <div className="App">
+    <>
       <Routes>
+        {isLogged ? (
+          <>
+            <Route path="*" element={<Dashboard />} />
+          </>
+        ) : (
+          <>
+            <Route path="*" element={<Navigate to="/login" />} />
+          </>
+        )}
         <Route path="/landing" element={<Landing />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/adminDashboard" element={<AdminDashborad />} />
-        <Route path="/companyDashboard" element={<CompanyDashborad />} />
         <Route path="/seller-register" element={<SellerRegister />} />
         <Route path="/buyer-register" element={<BuyerRegister />} />
-        <Route path="/company-all" element={<AllCompany />} />
-        <Route
-          path="/"
-          element={
-            isLogged ? (
-              userRole === "admin" ? (
-                <Navigate to="/adminDashboard" />
-              ) : userRole === "seller" ? (
-                <Navigate to="/dashboard/*" />
-              ) : userRole === "company" ? (
-                <Navigate to="/companyDashboard" />
-              ) : (
-                <Navigate to="/login" />
-              )
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
       </Routes>
-    </div>
+    </>
   );
+
+  // return (
+  //   <>
+  //     <Routes>
+  //       <Route
+  //         path="/"
+  //         element={
+  //           isLogged ? (
+  //             userRole === "admin" ? (
+  //               <Navigate to="/adminDashboard" />
+  //             ) : userRole === "seller" ? (
+  //               <Navigate to="/dashboard" />
+  //             ) : userRole === "company" ? (
+  //               <Navigate to="/companyDashboard" />
+  //             ) : (
+  //               <Navigate to="/login" />
+  //             )
+  //           ) : (
+  //             <Navigate to="/login" />
+  //           )
+  //         }
+  //       />
+  //       <Route path="/login" element={<Login />} />
+  //       <Route path="/dashboard" element={<Dashboard />} />
+  //       <Route path="/adminDashboard" element={<AdminDashborad />} />
+  //       <Route path="/companyDashboard" element={<CompanyDashborad />} />
+  //       <Route path="/seller-register" element={<SellerRegister />} />
+  //       <Route path="/buyer-register" element={<BuyerRegister />} />
+  //     </Routes>
+  //   </>
+  // );
 }
 
 export default App;
