@@ -99,10 +99,10 @@ const Earnings = () => {
           >
             <Button
               type="primary"
-              // onClick={() => handleEdit(record._id)}
+              // onClick={() => handleView(record._id)}
               style={{ marginRight: "5px", borderRadius: "5px" }}
             >
-              Edit
+              View
             </Button>
           </ConfigProvider>
 
