@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const Sellar = require("../models/sellar.model");
 const User = require("../models/userModel");
@@ -12,42 +12,43 @@ const createSeller = async (req, res) => {
     const userId = new mongoose.Types.ObjectId();
     const sellerId = userId;
 
-    const findUser = await User.findOne({ $or: [{ email: email }, { phone: phone }] });
-    if(!findUser){
-       // Secure Password With Hashing
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create the user with the generated ObjectId
-    const newUser = await User.create({
-      _id: userId,
-      email,
-      password: hashedPassword,
-      role: "seller",
-      firstName,
-      lastName,
-      phone,
-      address
+    const findUser = await User.findOne({
+      $or: [{ email: email }, { phone: phone }],
     });
+    if (!findUser) {
+      // Secure Password With Hashing
+      const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create the seller using the same ObjectId as the user
-    const sellerData = {
-      _id: sellerId,
-      user: userId,
-      firstName,
-      lastName,
-      phone,
-      address
-    };
-    await Sellar.create(sellerData);
+      // Create the user with the generated ObjectId
+      const newUser = await User.create({
+        _id: userId,
+        email,
+        password: hashedPassword,
+        role: "seller",
+        firstName,
+        lastName,
+        phone,
+        address,
+      });
 
-    res.json({ newUser, sellerId, sellerData });
-    }else{
-       // User already exists
+      // Create the seller using the same ObjectId as the user
+      const sellerData = {
+        _id: sellerId,
+        user: userId,
+        firstName,
+        lastName,
+        phone,
+        address,
+      };
+      await Sellar.create(sellerData);
+
+      res.json({ newUser, sellerId, sellerData });
+    } else {
+      // User already exists
       res.json({ msg: "User Already Exists!", success: false });
     }
-    
   } catch (error) {
-    console.error("Error creating seller:", error); 
+    console.error("Error creating seller:", error);
     // Internal server error
     res.status(500).json({ msg: "Internal Server Error", success: false });
   }
@@ -71,7 +72,7 @@ const GetaSellar = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const seller = await Sellar.findById(id).populate('user', 'email');
+    const seller = await Sellar.findById(id).populate("user", "email");
 
     if (!seller) {
       return res.status(404).json({ msg: "Seller not found", success: false });
@@ -87,7 +88,7 @@ const GetaSellar = async (req, res) => {
 //Update A Sellar
 
 const updateSeller = async (req, res) => {
-  const sellerId = req.params.id; 
+  const sellerId = req.params.id;
 
   try {
     const seller = await Sellar.findById(sellerId);
@@ -109,13 +110,13 @@ const updateSeller = async (req, res) => {
     const updateFields = {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      email: req.body.email, 
+      email: req.body.email,
       phone: req.body.phone,
-      address: req.body.address
+      address: req.body.address,
     };
 
     // Update only provided fields
-    Object.keys(updateFields).forEach(key => {
+    Object.keys(updateFields).forEach((key) => {
       if (updateFields[key] !== undefined) {
         seller[key] = updateFields[key];
       }
@@ -123,10 +124,19 @@ const updateSeller = async (req, res) => {
 
     const updatedSeller = await seller.save();
 
-    res.json({ success: true, updatedSeller: { ...seller.toObject(), email: userUpdate.email } });
+    res.json({
+      success: true,
+      updatedSeller: { ...seller.toObject(), email: userUpdate.email },
+    });
   } catch (error) {
     console.error("Error updating seller:", error);
-    res.status(500).json({ msg: "Failed to update seller", error: error.message, success: false });
+    res
+      .status(500)
+      .json({
+        msg: "Failed to update seller",
+        error: error.message,
+        success: false,
+      });
   }
 };
 
@@ -148,11 +158,26 @@ const deleteSeller = async (req, res) => {
 
     await Sellar.findByIdAndDelete(sellerId);
 
-    res.json({ success: true, msg: "Seller and associated user deleted successfully" });
+    res.json({
+      success: true,
+      msg: "Seller and associated user deleted successfully",
+    });
   } catch (error) {
     console.error("Error deleting seller:", error);
-    res.status(500).json({ msg: "Failed to delete seller", error: error.message, success: false });
+    res
+      .status(500)
+      .json({
+        msg: "Failed to delete seller",
+        error: error.message,
+        success: false,
+      });
   }
 };
 
-module.exports = { createSeller, getAllSellars, GetaSellar,updateSeller,deleteSeller };
+module.exports = {
+  createSeller,
+  getAllSellars,
+  GetaSellar,
+  updateSeller,
+  deleteSeller,
+};

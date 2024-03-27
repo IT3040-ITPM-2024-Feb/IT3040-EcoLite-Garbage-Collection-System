@@ -9,7 +9,7 @@ import {
   CalendarOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
-import Home from "./Home/Home";
+import SellerDashboard from "./Seller/SellerDashboard";
 import HeaderComponent from "../partials/Header";
 import Footer from "../partials/Footer";
 import AdminDashborad from "../pages/Admin/AdminDashboard";
@@ -78,7 +78,7 @@ const Dashboard = () => {
             ) : role == "company" ? (
               <Route path="/dashboard" element={<CompanyDashborad />} />
             ) : role == "seller" ? (
-              <Route path="/dashboard" element={<Home />} />
+              <Route path="/dashboard" element={<SellerDashboard />} />
             ) : (
               <Navigate to="/login" />
             )}
