@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post("/register",createSeller);
 router.get("/all",authMiddleware,getAllSellars);
-router.get("/:id",authMiddleware,GetaSellar);
+router.get("/:id",GetaSellar);
 router.put("/:id",authMiddleware,updateSeller);
 router.delete("/:id",authMiddleware,deleteSeller);
 

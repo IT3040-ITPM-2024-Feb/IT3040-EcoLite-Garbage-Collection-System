@@ -25,7 +25,7 @@ const HeaderComponent = () => {
   const userMenu = (
     <Menu>
       <Menu.Item>
-        <Link to="/profile">Profile</Link>
+        <Link to="/yourDetails">Profile</Link>
       </Menu.Item>
       <Menu.Item>
         <Link onClick={handleSignOut} to="/signout">

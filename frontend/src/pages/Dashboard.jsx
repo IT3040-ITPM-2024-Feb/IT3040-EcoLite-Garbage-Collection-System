@@ -16,9 +16,9 @@ import AdminDashborad from "../pages/Admin/AdminDashboard";
 import CompanyDashborad from "../pages/Company/companyDashboard";
 import Earnings from "../pages/Payments/Earnings";
 import Calender from "../pages/Others/Calender";
-import SellerProfile from "../pages/Settings/SellerProfile";
-import CompanyProfile from "../pages/Settings/CompanyProfile";
-import AdminProfile from "../pages/Settings/AdminProfile";
+import SellerProfile from "../pages/Seller/SellerProfile";
+import CompanyProfile from "../pages/Company/CompanyProfile";
+import AdminProfile from "../pages/Admin/AdminProfile";
 import Settings from "../pages/Settings/Settings";
 import ErrorPageTest from "../pages/ErrorPages/ErrorPageTest";
 
