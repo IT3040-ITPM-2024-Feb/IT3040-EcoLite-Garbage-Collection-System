@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Table, ConfigProvider } from "antd";
+import { Button, Table } from "antd";
 import { HandCoins, MessageCircleWarning, CircleAlert } from "lucide-react";
 import { DollarOutlined } from "@ant-design/icons";
 
@@ -85,26 +85,13 @@ const Earnings = () => {
             display: "flex",
           }}
         >
-          <ConfigProvider
-            theme={{
-              token: {
-                // Seed Token
-                colorPrimary: "#00b96b",
-                borderRadius: 2,
-
-                // Alias Token
-                colorBgContainer: "#f6ffed",
-              },
-            }}
+          <Button
+            type="primary"
+            // onClick={() => handleView(record._id)}
+            style={{ marginRight: "5px", borderRadius: "5px" }}
           >
-            <Button
-              type="primary"
-              // onClick={() => handleView(record._id)}
-              style={{ marginRight: "5px", borderRadius: "5px" }}
-            >
-              View
-            </Button>
-          </ConfigProvider>
+            View
+          </Button>
 
           <Button
             danger
@@ -141,18 +128,6 @@ const Earnings = () => {
             <Button style={{ marginLeft: "10px", paddingBottom: "10px" }}>
               Spends
             </Button>
-            <ConfigProvider
-              theme={{
-                token: {
-                  // Seed Token
-                  colorPrimary: "#00b96b",
-                  borderRadius: 2,
-
-                  // Alias Token
-                  colorBgContainer: "#f6ffed",
-                },
-              }}
-            >
               <Button
                 type="primary"
                 style={{
@@ -163,7 +138,6 @@ const Earnings = () => {
               >
                 Withdraw
               </Button>
-            </ConfigProvider>
           </div>
         </div>
         <div style={{ display: "flex", marginTop: "20px" }}>
@@ -301,18 +275,6 @@ const Earnings = () => {
             >
               Activity History
             </span>
-            <ConfigProvider
-              theme={{
-                token: {
-                  // Seed Token
-                  colorPrimary: "#00b96b",
-                  borderRadius: 2,
-
-                  // Alias Token
-                  colorBgContainer: "#f6ffed",
-                },
-              }}
-            >
               <Button
                 type="primary"
                 style={{
@@ -323,7 +285,6 @@ const Earnings = () => {
               >
                 Export Report
               </Button>
-            </ConfigProvider>
           </div>
           <Table
             style={{ borderTop: "4px solid #92f79a" }}

@@ -9,16 +9,16 @@ import {
   CalendarOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
-import Home from "./Home/Home";
+import SellerDashboard from "./Seller/SellerDashboard";
 import HeaderComponent from "../partials/Header";
 import Footer from "../partials/Footer";
 import AdminDashborad from "../pages/Admin/AdminDashboard";
 import CompanyDashborad from "../pages/Company/companyDashboard";
 import Earnings from "../pages/Payments/Earnings";
 import Calender from "../pages/Others/Calender";
-import SellerProfile from "../pages/Settings/SellerProfile";
-import CompanyProfile from "../pages/Settings/CompanyProfile";
-import AdminProfile from "../pages/Settings/AdminProfile";
+import SellerProfile from "../pages/Seller/SellerProfile";
+import CompanyProfile from "../pages/Company/CompanyProfile";
+import AdminProfile from "../pages/Admin/AdminProfile";
 import Settings from "../pages/Settings/Settings";
 import ErrorPageTest from "../pages/ErrorPages/ErrorPageTest";
 
@@ -78,7 +78,7 @@ const Dashboard = () => {
             ) : role == "company" ? (
               <Route path="/dashboard" element={<CompanyDashborad />} />
             ) : role == "seller" ? (
-              <Route path="/dashboard" element={<Home />} />
+              <Route path="/dashboard" element={<SellerDashboard />} />
             ) : (
               <Navigate to="/login" />
             )}
