@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useFormik } from "formik";
 import { Card, Spin, Avatar, Button, Input, Form, message } from "antd";
 import axios from "axios";
 import avatar from "../../assets/images/UserGlobal/avatar.png";
@@ -29,6 +28,17 @@ const SellerProfile = () => {
     NIC: "1999999999V",
   };
 
+  const theme = {
+    token: {
+      // Seed Token
+      colorPrimary: "#00b96b",
+      borderRadius: 2,
+
+      // Alias Token
+      colorBgContainer: "#f6ffed",
+    },
+  };
+
   // Use the useEffect hook to fetch user data when the component mounts
   useEffect(() => {
     const fetchUserData = async () => {
@@ -52,8 +62,6 @@ const SellerProfile = () => {
           }
         );
 
-        // console.log(response.data.seller)
-
         // Set the user data to the formik values
         setUser(response.data.seller);
         setLoading(false);
@@ -73,20 +81,32 @@ const SellerProfile = () => {
 
   const handleEditSellerModalCancel = () => {
     setEditModalVisible(false);
+    window.location.reload();
   };
 
   // Display the user profile card with skeleton loading spinner while the user data is being fetched
   return (
     <div style={{ marginTop: "50px" }}>
       {loading ? (
-        <Spin size="large" />
+        <Spin
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          size="large"
+        />
       ) : user ? (
         <div>
           <div style={{ textAlign: "center", marginBottom: 20 }}>
             <Avatar size={150} src={avatar} />
           </div>
           <Card
-            style={{ width: 600, margin: "0 auto 20px auto" }}
+            style={{
+              width: 600,
+              margin: "0 auto 20px auto",
+              boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+            }}
             loading={loading}
           >
             <Meta
@@ -114,7 +134,17 @@ const SellerProfile = () => {
                     </Form.Item>
                     {/* Add more fields here */}
                   </Form>
-                  <Button onClick={handleEditSellerModalOpen} style={{ float: "right" }}>Edit</Button>
+                  <Button
+                    type="primary"
+                    onClick={handleEditSellerModalOpen}
+                    style={{
+                      marginRight: "5px",
+                      borderRadius: "5px",
+                      float: "right",
+                    }}
+                  >
+                    View
+                  </Button>
                 </>
               }
             />
@@ -126,7 +156,7 @@ const SellerProfile = () => {
       {/* Edit User Modal */}
       <EditSellerModal
         userId={userId}
-        userData = {testUserData}
+        userData={testUserData}
         visible={editModalVisible}
         onCancel={handleEditSellerModalCancel}
         onUpdate={handleEditSellerModalOpen}

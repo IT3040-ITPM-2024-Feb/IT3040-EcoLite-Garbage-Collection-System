@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Form, Input, Button, Upload, message, Select } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import { Modal, Form, Input, Button, message } from "antd";
 import axios from "axios";
-
-const { Option } = Select;
 
 const EditSellerModal = ({ visible, onCancel, userId, userData, onUpdate }) => {
   const [form] = Form.useForm();
@@ -72,22 +69,27 @@ const EditSellerModal = ({ visible, onCancel, userId, userData, onUpdate }) => {
       title="Edit User"
       visible={visible}
       onCancel={onCancel}
-      style={{ top: 20 }}
+      style={{ top: 20}}
       footer={[
-        <Button key="back" onClick={onCancel}>
-          Cancel
-        </Button>,
-        <Button
-          key="submit"
-          type="primary"
-          loading={loading}
-          onClick={form.submit}
-        >
-          Update
-        </Button>,
+          <Button
+            key="submit"
+            type="primary"
+            loading={loading}
+            onClick={form.submit}
+            style={{ borderRadius: "5px", float: "right", marginTop: "-30px" }}
+          >
+            Update
+          </Button>,
+          <Button
+            key="back" 
+            onClick={onCancel}
+            style={{ marginRight: "5px", borderRadius: "5px", float: "right", marginTop: "-30px" }}
+          >
+            Cancel
+          </Button>
       ]}
     >
-      <Form form={form} onFinish={onFinish} layout="vertical">
+      <Form form={form} onFinish={onFinish} layout="vertical" style={{height:"450px"}}>
         <Form.Item
           name="fullName"
           label="Full Name"
