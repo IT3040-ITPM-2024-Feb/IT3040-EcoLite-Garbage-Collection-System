@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Layout } from "antd";
 import SideMenu from "../partials/SideMenu";
@@ -8,7 +8,9 @@ import {
   DollarOutlined,
   CalendarOutlined,
   SettingOutlined,
+  QuestionCircleOutlined,
 } from "@ant-design/icons";
+import { FloatButton, Button, Modal } from "antd";
 import SellerDashboard from "./Seller/SellerDashboard";
 import HeaderComponent from "../partials/Header";
 import Footer from "../partials/Footer";
@@ -21,11 +23,15 @@ import CompanyProfile from "../pages/Company/CompanyProfile";
 import AdminProfile from "../pages/Admin/AdminProfile";
 import Settings from "../pages/Settings/Settings";
 import ErrorPageTest from "../pages/ErrorPages/ErrorPageTest";
+import CustomerServiceModal from "./Others/CustomerServiceModal";
 
 const { Sider, Content } = Layout;
 
 const Dashboard = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   const role = window.localStorage.getItem("role");
+  
 
   // Populate this array with the navigation links
   const menuItems = [
@@ -55,6 +61,14 @@ const Dashboard = () => {
       icon: SettingOutlined,
     },
   ];
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -100,6 +114,24 @@ const Dashboard = () => {
           </Routes>
         </Content>
       </Layout>
+      <FloatButton
+        icon={<QuestionCircleOutlined />}
+        onClick={showModal}
+        type="primary"
+        style={{
+          right: 55,
+        }}
+      />
+      <Modal
+        title="Customer Service Chat"
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        footer={null}
+        style={{ position: "absolute", top: window.innerHeight - 650, right: 55, maxWidth: "400px"}}
+        bodyStyle={{ overflow: "auto", padding: "20px 20px" }}
+      >
+        <CustomerServiceModal />
+      </Modal>
       <Footer />
     </Layout>
   );
