@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Table } from "antd";
 import { HandCoins, MessageCircleWarning, CircleAlert } from "lucide-react";
 import { DollarOutlined } from "@ant-design/icons";
+import DummyCart from "../../Testing/DummyCart";
 
 const Earnings = () => {
   const dummyCreditData = {
@@ -293,6 +294,7 @@ const Earnings = () => {
           />
         </div>
       </div>
+      <DummyCart />
     </>
   );
 };

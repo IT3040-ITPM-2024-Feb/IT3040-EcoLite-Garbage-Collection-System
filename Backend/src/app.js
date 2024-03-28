@@ -11,6 +11,7 @@ const companyRoute = require("./routers/company.route");
 const sellarRoute = require("./routers/sellar.route");
 const subscriptionRoute = require("./routers/subscription.route");
 const binRoute = require('./routers/bin.route');
+const paymentsRoute = require('./routers/payments.route');
 
 dbConnect();
 
@@ -25,6 +26,8 @@ app.use("/api/company", companyRoute);
 app.use("/api/sellar", sellarRoute);
 app.use("/api/subscription", subscriptionRoute);
 app.use("/api/bin", binRoute);
+app.use("/api/payments", paymentsRoute);
+
 
 
 app.listen(PORT, () => {
