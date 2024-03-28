@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, Spin, Avatar, Button, Input, Form, message } from "antd";
 import axios from "axios";
+import { LoadingOutlined } from "@ant-design/icons";
 import avatar from "../../assets/images/UserGlobal/avatar.png";
 import EditSellerModal from "./EditSellerModal";
 
@@ -26,17 +27,6 @@ const SellerProfile = () => {
     role: "seller",
     phone: "0712345678",
     NIC: "1999999999V",
-  };
-
-  const theme = {
-    token: {
-      // Seed Token
-      colorPrimary: "#00b96b",
-      borderRadius: 2,
-
-      // Alias Token
-      colorBgContainer: "#f6ffed",
-    },
   };
 
   // Use the useEffect hook to fetch user data when the component mounts
@@ -89,13 +79,14 @@ const SellerProfile = () => {
     <div style={{ marginTop: "50px" }}>
       {loading ? (
         <Spin
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          size="large"
-        />
+        indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        size="large"
+      />
       ) : user ? (
         <div>
           <div style={{ textAlign: "center", marginBottom: 20 }}>
@@ -143,7 +134,7 @@ const SellerProfile = () => {
                       float: "right",
                     }}
                   >
-                    View
+                    Update
                   </Button>
                 </>
               }
