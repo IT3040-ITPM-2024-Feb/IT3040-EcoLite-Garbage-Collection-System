@@ -28,8 +28,6 @@ const CompanyProfile = () => {
     companyAbout: "test about",
     openHours: "8.00 AM",
     closeHours: "5.00 PM",
-    companyImage:
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fbusiness%2F&psig=AOvVaw3",
     subscribedSellers: [
       {
         sellerId: "123",
